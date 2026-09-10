@@ -1,6 +1,7 @@
 import re
 import math
 import os
+import json
 from collections import defaultdict
 
 # ==========================================
@@ -244,6 +245,15 @@ def main():
     print("PART D: CLOTHING SEARCH ENGINE CLI")
     print("="*50)
     
+    # Save Dictionary/Inverted Index output
+    with open("dictionary_output.txt", "w") as f:
+        json.dump({k: v['df'] for k, v in positional_index.items()}, f, indent=4)
+        
+    # Save Positional Index output
+    with open("positional_output.txt", "w") as f:
+        json.dump({k: v['postings'] for k, v in positional_index.items()}, f, indent=4)
+    print("Output files (dictionary_output.txt, positional_output.txt) generated successfully!")
+
     while True:
         print("\nSelect Search Mode:")
         print("1. Free-Text Search (VSM)")
