@@ -9,8 +9,8 @@ This project is a small-scale clothing search engine built using a corpus of 100
 
 ## Features & Implementation
 * **Vector Space Model (VSM):** Implements ranked retrieval for free-text queries using the `lnc.ltc` cosine similarity weighting scheme.
-* **Positional Indexing:** Extends the inverted index to store token positions, enabling exact phrase searches and ordered proximity searches (WITHIN/k)[cite: 2].
-* **Pre-processing:** Includes tokenization, case normalization, punctuation removal, stop-word filtering, and stemming[cite: 2].
+* **Positional Indexing:** Extends the inverted index to store token positions, enabling exact phrase searches and ordered proximity searches (WITHIN/k).
+* **Pre-processing:** Includes tokenization, case normalization, punctuation removal, stop-word filtering, and stemming.
 
 ### Novelty Enhancements
 To go beyond the baseline requirements, this project includes the following custom features:
