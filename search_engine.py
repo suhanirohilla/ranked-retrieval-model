@@ -50,7 +50,6 @@ def build_index(filename):
     with open(filename, 'r', encoding='utf-8') as f:
         content = f.read()
 
-    # Parse XML-like structure
     docs = re.findall(r'<DOC>\s*<DOCID>(.*?)</DOCID>\s*<CATEGORY>(.*?)</CATEGORY>\s*<TITLE>(.*?)</TITLE>\s*<TEXT>(.*?)</TEXT>\s*</DOC>', content, re.DOTALL)
     
     # positional_index structure: {term: {'df': int, 'postings': {docID: [pos1, pos2, ...]}}}
@@ -238,7 +237,7 @@ def main():
     doc_lengths = get_doc_lengths(positional_index, N)
     print(f"Index built successfully! {N} documents processed.\n")
 
-    # Run mandatory Part E tests first
+    # Run Part E tests
     run_tests(positional_index, doc_lengths, doc_metadata, N)
 
     print("\n" + "="*50)
@@ -269,22 +268,31 @@ def main():
         
         if choice == '1':
             results = vsm_search(query, positional_index, doc_lengths, doc_metadata, N)
-            print(f"\nTop 10 Results for '{query}':")
-            for rank, (doc_id, score, title, category) in enumerate(results, 1):
-                print(f"{rank}. [DocID: {doc_id}] Score: {score:.4f} | {category} | {title}")
+            if not results:
+                print(f"\nNo results found for '{query}'.")
+            else:
+                print(f"\nTop {len(results)} Results for '{query}':")
+                for rank, (doc_id, score, title, category) in enumerate(results, 1):
+                    print(f"{rank}. [DocID: {doc_id}] Score: {score:.4f} | {category} | {title}")
                 
         elif choice == '2':
             results = positional_search(query, positional_index, doc_metadata, search_type="phrase")
-            print(f"\nTop 10 Phrase Results for '{query}':")
-            for rank, res in enumerate(results, 1):
-                print(f"{rank}. [DocID: {res['doc_id']}] {res['category']} | {res['title']} | Positions: {res['matches']}")
+            if not results:
+                print(f"\nNo phrase matches found for '{query}'.")
+            else:
+                print(f"\nTop {len(results)} Phrase Results for '{query}':")
+                for rank, res in enumerate(results, 1):
+                    print(f"{rank}. [DocID: {res['doc_id']}] {res['category']} | {res['title']} | Positions: {res['matches']}")
                 
         elif choice == '3':
             k = int(input("Enter proximity distance (k): "))
             results = positional_search(query, positional_index, doc_metadata, search_type="proximity", k=k)
-            print(f"\nTop 10 Proximity Results for '{query}' WITHIN/{k}:")
-            for rank, res in enumerate(results, 1):
-                print(f"{rank}. [DocID: {res['doc_id']}] {res['category']} | {res['title']} | Positions: {res['matches']}")
+            if not results:
+                print(f"\nNo proximity matches found for '{query}' WITHIN/{k}.")
+            else:
+                print(f"\nTop {len(results)} Proximity Results for '{query}' WITHIN/{k}:")
+                for rank, res in enumerate(results, 1):
+                    print(f"{rank}. [DocID: {res['doc_id']}] {res['category']} | {res['title']} | Positions: {res['matches']}")
 
 if __name__ == "__main__":
     main()
