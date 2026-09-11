@@ -21,7 +21,7 @@ To go beyond the baseline requirements, this project includes the following cust
 
 ## How to Run
 1. Ensure Python 3.x is installed on your machine.
-2. Verify that `corpus_100.txt` is in the same directory as the Python script[cite: 1, 2].
+2. Verify that `corpus_100.txt` is in the same directory as the Python script.
 3. Execute the script via terminal:
    ```bash
    python search_engine.py
