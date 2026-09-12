@@ -4,8 +4,8 @@
 This project is a small-scale clothing search engine built using a corpus of 100 product descriptions. It features both a standard inverted index and a positional index to process free-text, exact phrase, and proximity queries.
 
 ## Team Members
-* Sannidhya Rai
-* Suhani Rohilla
+* Sannidhya Rai - 2410110301
+* Suhani Rohilla - 2410110480
 
 ## Features & Implementation
 * **Vector Space Model (VSM):** Implements ranked retrieval for free-text queries using the `lnc.ltc` cosine similarity weighting scheme.
